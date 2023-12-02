@@ -13,5 +13,5 @@ module.exports = {
     /** 他のプロパティによって無視される可能性がある場合に警告 */
     'plugin/declaration-block-no-ignored-properties': true
   },
-  ignoreFiles: ['**/node_modules/**']
+  ignoreFiles: ['**/node_modules/**', '**/out/**']
 }
