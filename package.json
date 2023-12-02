@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
-    "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\""
+    "lint": "next lint && npm run stylelint",
+    "lint:fix": "next lint --fix && npm run prettier && npm run stylelint:fix",
+    "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\"",
+    "stylelint": "stylelint \"**/*.+(css|scss)\"",
+    "stylelint:fix": "stylelint \"**/*.+(css|scss)\" --fix"
   },
   "dependencies": {
     "next": "14.0.3",
@@ -24,6 +26,12 @@
     "eslint-config-next": "14.0.3",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.1.0",
+    "sass": "^1.69.5",
+    "stylelint": "^15.11.0",
+    "stylelint-config-recess-order": "^4.4.0",
+    "stylelint-config-recommended-scss": "^13.1.0",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-declaration-block-no-ignored-properties": "^2.7.0",
     "typescript": "^5"
   }
 }
