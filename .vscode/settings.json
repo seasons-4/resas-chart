@@ -1,6 +1,7 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true // 保存時にESLintのFixを実行
+    "source.fixAll.eslint": true, // 保存時にESLintのFixを実行
+    "source.fixAll.stylelint": true // 保存時にStylelintのFixを実行
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
@@ -15,6 +16,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2
   },
+  "stylelint.validate": ["css", "scss"],
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.insertSpaces": true,

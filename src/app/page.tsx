@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import styles from './page.module.css'
+import styles from './page.module.scss'
 
 export default function Home() {
   return (
@@ -20,7 +20,7 @@ export default function Home() {
             <Image
               src="/vercel.svg"
               alt="Vercel Logo"
-              className={styles.vercelLogo}
+              className={styles['vercel-logo']}
               width={100}
               height={24}
               priority
