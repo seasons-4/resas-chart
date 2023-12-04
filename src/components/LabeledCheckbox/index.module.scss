@@ -1,0 +1,51 @@
+.label {
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 1rem 0.5rem 2rem;
+  cursor: pointer;
+  background-color: var(--color-primary-sub);
+  border-radius: 16px;
+
+  // NOTE: :hasは20231201時点ではFirefoxでは動作しないが、要件定義的にはChromeのみ対応で問題ないため使用
+  &:has(input[type='checkbox']:checked) {
+    font-weight: bold;
+    background-color: var(--color-secondary-sub);
+  }
+}
+
+.checkbox {
+  // MEMO: 未チェック時のチェックボックスの描画
+  position: absolute;
+  top: 50%;
+  left: 0.5rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  margin-top: -0.5rem;
+  content: '';
+  background-color: var(--color-white);
+  border: 1px solid var(--color-light-gray);
+  border-radius: 3px;
+
+  &::after {
+    position: absolute;
+    display: none;
+    content: '';
+  }
+
+  input[type='checkbox']:checked ~ & {
+    background-color: var(--color-secondary-sub);
+    border-color: var(--color-secondary-sub);
+
+    // MEMO: チェック時のチェックマークを描画
+    &::after {
+      left: 0.25rem;
+      display: block;
+      width: 0.5rem;
+      height: 0.75rem;
+      border: solid var(--color-white);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+}
