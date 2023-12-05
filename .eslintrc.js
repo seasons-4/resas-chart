@@ -6,7 +6,8 @@ module.exports = {
     'plugin:import/recommended',
     'plugin:import/warnings',
     'plugin:@typescript-eslint/recommended',
-    'prettier'
+    'prettier',
+    'plugin:storybook/recommended'
   ],
   root: true,
   rules: {
