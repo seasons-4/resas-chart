@@ -1,0 +1,21 @@
+.container {
+  padding: 8px 16px;
+  background-color: var(--color-white);
+  border-radius: 8px;
+}
+
+.title {
+  padding: 8px;
+  font-weight: bold;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border-radius: 8px;
+}
+
+.flexible-list {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 8px;
+  justify-content: space-between;
+  margin-top: 4px;
+}
