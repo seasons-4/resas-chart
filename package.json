@@ -17,6 +17,7 @@
     "prepare": "husky install",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "test-storybook": "test-storybook",
     "test": "jest"
   },
   "dependencies": {
@@ -34,9 +35,12 @@
     "@storybook/addon-links": "^7.6.3",
     "@storybook/addon-viewport": "^7.6.3",
     "@storybook/blocks": "^7.6.3",
+    "@storybook/jest": "^0.2.3",
     "@storybook/nextjs": "^7.6.3",
     "@storybook/react": "^7.6.3",
     "@storybook/test": "^7.6.3",
+    "@storybook/test-runner": "^0.16.0",
+    "@storybook/testing-library": "^0.2.2",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.1",
