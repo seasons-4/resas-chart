@@ -29,3 +29,6 @@ npm-debug.log*
 *.tsbuildinfo
 next-env.d.ts
 *.scss.d.ts
+
+# storybook
+/storybook-static
