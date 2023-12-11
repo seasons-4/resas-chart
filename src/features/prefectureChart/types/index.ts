@@ -40,7 +40,6 @@ export type CompositionPerYearResponse = {
 /**
  * RESAS APIの人口構成の１都道府県ごとのデータを表す型
  */
-export type CompositionPerPref = {
-  prefCode: string
+export type CompositionPerPref = ResasPrefecture & {
   data: CompositionPerYearResponse
 }

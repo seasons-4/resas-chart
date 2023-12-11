@@ -3,15 +3,15 @@ import useSWR, { useSWRConfig } from 'swr'
 
 import { getCompositionPerYear } from '../api'
 
-import type { CompositionPerPref, CompositionPerYearResponse } from '../types'
+import type { CompositionPerPref, ResasPrefecture } from '../types'
 
 // キャッシュされるデータは都道府県コードをキー名に以下の型を満たす値でキャッシュされる
 type CachedData = {
-  data: {
-    prefCode: string
-    data: CompositionPerYearResponse
-  }
+  data: CompositionPerPref
 }
+
+/** 都道府県ごとの人口構成データのキャッシュ格納時のキー名のprefix */
+const COMPOSITION_CACHE_KEY_PREFIX = 'composition-' as const
 
 /**
  * 対象の都道府県のリストに対して、年ごとの人口構成データをキャッシュをベースに取得して返すカスタムフック
@@ -22,49 +22,62 @@ type CachedData = {
  * キャッシュがない場合はAPIからデータを取得し、指定のキー名でキャッシュする。
  * APIから取得中もキャッシュに選択中の都道府県のデータがあればそれを返され、キャッシュに更新がそれがフックされ新規のデータが返される。
  *
- * @param prefCodes - 人口構成データを取得する都道府県のリスト
+ * @param prefectures - 人口構成データを取得する都道府県のリスト
  * @returns data, error キャッシュされたコンポジションデータと、フェッチ中に発生したエラーを含むオブジェクト。
  */
-export const useCompositionPerYear = (prefCodes: string[]) => {
+export const useCompositionPerYear = (prefectures: ResasPrefecture[]) => {
   const { cache } = useSWRConfig()
-  const noCachedCodes = prefCodes.filter(
-    (prefCode) => ![...cache.keys()].includes(prefCode)
-  )
+  const noCachedPrefectures = prefectures.filter((prefecture) => {
+    return ![...cache.keys()].includes(
+      `${COMPOSITION_CACHE_KEY_PREFIX}${prefecture.prefCode}`
+    )
+  })
 
   const swrKey = (() => {
-    switch (noCachedCodes.length) {
+    switch (noCachedPrefectures.length) {
       case 0:
         return 'empty'
       case 1:
-        return noCachedCodes[0]
-      default:
-        return `all-${noCachedCodes.join(',')}`
+        return `${COMPOSITION_CACHE_KEY_PREFIX}${noCachedPrefectures[0].prefCode}`
+      default: {
+        const codes = noCachedPrefectures
+          .map(({ prefCode }) => prefCode)
+          .join(',')
+        return `all-${codes}`
+      }
     }
   })()
 
-  const { data: _data, error } = useSWR(swrKey, async () => {
-    switch (noCachedCodes.length) {
+  const {
+    data: _data,
+    error,
+    isLoading
+  } = useSWR(swrKey, async () => {
+    switch (noCachedPrefectures.length) {
       case 0:
         // 必要な都道府県情報がすべてキャッシュ済みの場合リクエストを発生させない
         return Promise.resolve(undefined)
       case 1: {
         // キャッシュにない都道府県情報が一つだけ必要な場合(新規の都道府県を選択した場合)
-        const prefCode = noCachedCodes[0]
-        const data = await getCompositionPerYear(prefCode)
+        const prefecture = noCachedPrefectures[0]
+        const data = await getCompositionPerYear(prefecture.prefCode)
         // NOTE: swrによりswrKey名で以下return値がCachedData型に格納されてキャッシュされる
         return {
-          prefCode,
+          ...prefecture,
           data
         }
       }
       default: {
         // キャッシュにない都道府県情報が一度に複数必要な場合（画面操作からは単体取得しかできないので基本的にはURL操作・リロード時）
-        const promises = noCachedCodes.map<Promise<CompositionPerPref>>(
-          (prefCode) => {
-            return getCompositionPerYear(prefCode).then((data) => {
-              const res = { prefCode, data }
+        const promises = noCachedPrefectures.map<Promise<CompositionPerPref>>(
+          (prefecture) => {
+            return getCompositionPerYear(prefecture.prefCode).then((data) => {
+              const res = { ...prefecture, data }
               // NOTE: return値ではなく、単体ごとにswrKeyのcase 1と同様のキー名・データ型でキャッシュ
-              cache.set(prefCode, { data: res } satisfies CachedData)
+              cache.set(
+                `${COMPOSITION_CACHE_KEY_PREFIX}${prefecture.prefCode}`,
+                { data: res } satisfies CachedData
+              )
               return res
             })
           }
@@ -78,9 +91,11 @@ export const useCompositionPerYear = (prefCodes: string[]) => {
    * 対象の都道府県からキャッシュにあるものだけ返却
    * キャッシュに更新があるとフックされ、新規のデータが返される
    */
-  const cachedCompositionList = prefCodes.flatMap<CompositionPerPref>(
-    (prefCode) => {
-      const cachedData = cache.get(prefCode) as CachedData | undefined
+  const cachedCompositionList = prefectures.flatMap<CompositionPerPref>(
+    ({ prefCode }) => {
+      const cachedData = cache.get(
+        `${COMPOSITION_CACHE_KEY_PREFIX}${prefCode}`
+      ) as CachedData | undefined
       if (isUndefined(cachedData)) {
         return []
       }
@@ -90,6 +105,7 @@ export const useCompositionPerYear = (prefCodes: string[]) => {
 
   return {
     data: cachedCompositionList,
-    error
+    error,
+    isLoading
   }
 }

@@ -11,7 +11,7 @@ import type { ResasResponse } from '@/types'
  * @throws レスポンスがエラーの場合、またはレスポンスボディが不正な場合にエラーをthrow
  */
 export const getCompositionPerYear = async (
-  prefCode: string
+  prefCode: number
 ): Promise<CompositionPerYearResponse> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_RESAS_API_URL}/population/composition/perYear?prefCode=${prefCode}&cityCode=-`,
