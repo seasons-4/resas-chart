@@ -1,5 +1,7 @@
 import { Noto_Sans_JP } from 'next/font/google'
 
+import { SWRProvider } from '@/lib/swr'
+
 import type { Metadata } from 'next'
 
 import 'destyle.css'
@@ -22,7 +24,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className={notoSansJp.className}>{children}</body>
+      <body className={notoSansJp.className}>
+        <SWRProvider>{children}</SWRProvider>
+      </body>
     </html>
   )
 }
