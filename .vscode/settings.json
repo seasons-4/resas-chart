@@ -1,7 +1,7 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true, // 保存時にESLintのFixを実行
-    "source.fixAll.stylelint": true // 保存時にStylelintのFixを実行
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
@@ -33,5 +33,5 @@
       "mode": "auto"
     }
   ],
-  "cSpell.words": ["clsx", "resas"]
+  "cSpell.words": ["clsx", "Highcharts", "resas"]
 }
