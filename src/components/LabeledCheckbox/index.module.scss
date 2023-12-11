@@ -6,6 +6,10 @@
   background-color: var(--color-primary-sub);
   border-radius: 16px;
 
+  &:hover {
+    opacity: 0.8;
+  }
+
   // NOTE: :hasは20231201時点ではFirefoxでは動作しないが、要件定義的にはChromeのみ対応で問題ないため使用
   &:has(input[type='checkbox']:checked) {
     font-weight: bold;
@@ -27,17 +31,23 @@
   border: 1px solid var(--color-light-gray);
   border-radius: 3px;
 
+  .label:hover & {
+    border-color: var(--color-secondary-sub);
+  }
+
+  // MEMO: 未チェック時のチェックマークの描画
   &::after {
     position: absolute;
     display: none;
     content: '';
   }
 
+  // MEMO: チェック時のチェックボックスの描画
   input[type='checkbox']:checked ~ & {
     background-color: var(--color-secondary-sub);
     border-color: var(--color-secondary-sub);
 
-    // MEMO: チェック時のチェックマークを描画
+    // MEMO: チェック時のチェックマークの描画
     &::after {
       left: 0.25rem;
       display: block;

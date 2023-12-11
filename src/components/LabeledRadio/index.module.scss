@@ -1,0 +1,66 @@
+.label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.5rem 0.7rem 0.5rem 0.5rem;
+  cursor: pointer;
+  background-color: var(--color-primary-sub);
+  border-radius: 16px;
+
+  // MEMO: 選択中inputを子に持つ時
+  &:has(input[type='radio']:checked) {
+    font-weight: bold;
+    cursor: default;
+    background-color: var(--color-secondary-sub);
+  }
+
+  // MEMO: 非選択inputを子に持つ時
+  &:not(:has(input[type='radio']:checked)) {
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.radio {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 4px;
+  cursor: pointer;
+
+  // MEMO: 外側のマルの色
+  border: 1px solid var(--color-white);
+  border-radius: 50%;
+
+  // MEMO: 内側のマル
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    content: '';
+    background-color: var(--color-white);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  // MEMO: 選択された時の外側のマルの色
+  &:checked {
+    cursor: default;
+    background-color: var(--color-white);
+    border-color: var(--color-white);
+
+    // MEMO: 選択された時の内側のマルの色
+    &::before {
+      background-color: var(--color-secondary);
+    }
+  }
+
+  // MEMO: 非選択かつホバー時の内側のマルの色
+  .label:hover &:not(&:checked)::before {
+    background-color: var(--color-secondary-sub);
+    border-color: var(--color-secondary-sub);
+  }
+}
