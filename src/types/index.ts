@@ -17,3 +17,16 @@ export type ResasErrorResponse =
   | {
       message: null
     }
+
+/**
+ * RESAS API 正常時のレスポンスボディを表す型
+ */
+type ResasResponseBody<T> = {
+  message: null
+  result: T
+}
+
+/**
+ * RESAS API レスポンスを表す型
+ */
+export type ResasResponse<T> = ResasResponseBody<T> | ResasErrorResponse

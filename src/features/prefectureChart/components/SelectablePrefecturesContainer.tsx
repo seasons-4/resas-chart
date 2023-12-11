@@ -1,5 +1,5 @@
 import { SelectablePrefectures } from './SelectablePrefectures'
-import { getPrefectures } from '../api/getPrefectures'
+import { getPrefectures } from '../api'
 
 /**
  * SelectablePrefectures.tsxのコンテナコンポーネント

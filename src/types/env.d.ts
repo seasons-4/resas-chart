@@ -5,7 +5,7 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       /** RESAS API key */
-      RESAS_API_KEY: string
+      NEXT_PUBLIC_RESAS_API_KEY: string
       /** RESAS API URL */
       NEXT_PUBLIC_RESAS_API_URL: string
     }
