@@ -6,7 +6,7 @@ import { memo } from 'react'
 import { LabeledCheckbox } from '@/components/LabeledCheckbox'
 
 import styles from './SelectablePrefectures.module.scss'
-import { usePrefectureQuery } from '../hooks/usePrefectureQuery'
+import { usePrefectureQuery } from '../hooks'
 
 import type { ResasPrefecture } from '../types'
 
