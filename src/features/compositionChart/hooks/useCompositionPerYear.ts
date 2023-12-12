@@ -1,9 +1,10 @@
 import { isUndefined } from 'lodash'
 import useSWR, { useSWRConfig } from 'swr'
 
-import { getCompositionPerYear } from '../api'
+import { getCompositionPerYear } from '../api/getCompositionPerYear'
 
-import type { CompositionPerPref, ResasPrefecture } from '../types'
+import type { CompositionPerPref } from '../types'
+import type { ResasPrefecture } from '@/types'
 
 // キャッシュされるデータは都道府県コードをキー名に以下の型を満たす値でキャッシュされる
 type CachedData = {
@@ -20,7 +21,7 @@ const COMPOSITION_CACHE_KEY_PREFIX = 'composition-' as const
  * swrを使用して、キャッシュの有無に応じてデータ取得を行う。
  * キャッシュがある場合はAPIリクエストを発生させず、キャッシュを返す。
  * キャッシュがない場合はAPIからデータを取得し、指定のキー名でキャッシュする。
- * APIから取得中もキャッシュに選択中の都道府県のデータがあればそれを返され、キャッシュに更新がそれがフックされ新規のデータが返される。
+ * APIから取得中もキャッシュに選択中の都道府県のデータがあればそれが返され、キャッシュに更新があるとフックされ新規のデータが返される。
  *
  * @param prefectures - 人口構成データを取得する都道府県のリスト
  * @returns data, error キャッシュされたコンポジションデータと、フェッチ中に発生したエラーを含むオブジェクト。

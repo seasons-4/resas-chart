@@ -6,14 +6,14 @@ import { memo } from 'react'
 
 import { LabeledRadio } from '@/components/LabeledRadio'
 
-import styles from './SelectableCompositionLabels.module.scss'
+import styles from './ui/SelectableLabels.module.scss'
 import { CHART_LABELS, LABEL_QUERY_KEY } from '../constants'
 import { isCompositionPerYearLabel } from '../filters'
 
 /**
  * 人口構成のラベルを選択するフォーム
  */
-export const SelectableCompositionLabels = memo(() => {
+export const SelectableLabels = memo(() => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const pathName = usePathname()
@@ -56,4 +56,4 @@ export const SelectableCompositionLabels = memo(() => {
   )
 })
 
-SelectableCompositionLabels.displayName = 'SelectableCompositionLabels'
+SelectableLabels.displayName = 'SelectableCompositionLabels'

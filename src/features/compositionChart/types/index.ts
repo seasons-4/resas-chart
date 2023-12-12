@@ -1,12 +1,5 @@
 import type { CHART_LABELS } from '../constants'
-
-/**
- * RESAS APIの1都道府県を表す型
- */
-export type ResasPrefecture = {
-  prefCode: number
-  prefName: string
-}
+import type { ResasPrefecture } from '@/types'
 
 /**
  * RESAS APIの人口構成の１データを表す型

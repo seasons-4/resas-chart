@@ -1,7 +1,6 @@
 import { isString } from 'lodash'
 
-import type { ResasPrefecture } from '../types'
-import type { ResasResponse } from '@/types'
+import type { ResasPrefecture, ResasResponse } from '@/types'
 
 /**
  * 都道府県一覧データを取得する関数

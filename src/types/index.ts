@@ -30,3 +30,11 @@ type ResasResponseBody<T> = {
  * RESAS API レスポンスを表す型
  */
 export type ResasResponse<T> = ResasResponseBody<T> | ResasErrorResponse
+
+/**
+ * RESAS APIの1都道府県を表す型
+ */
+export type ResasPrefecture = {
+  prefCode: number
+  prefName: string
+}

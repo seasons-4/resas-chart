@@ -5,10 +5,10 @@ import { memo } from 'react'
 
 import { LabeledCheckbox } from '@/components/LabeledCheckbox'
 
-import styles from './SelectablePrefectures.module.scss'
-import { usePrefectureQuery } from '../hooks'
+import styles from './ui/SelectablePrefectures.module.scss'
+import { usePrefectureQuery } from '../hooks/usePrefectureQuery'
 
-import type { ResasPrefecture } from '../types'
+import type { ResasPrefecture } from '@/types'
 
 type Props = {
   data: ResasPrefecture[]
@@ -19,7 +19,7 @@ type Props = {
  *
  * @param data - 都道府県の一覧
  */
-export const SelectablePrefectures = memo(({ data }: Props) => {
+export const SelectableForm = memo(({ data }: Props) => {
   const [selectedPrefectures, updateQueryParams] = usePrefectureQuery()
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateQueryParams(e.target.value)
@@ -51,4 +51,4 @@ export const SelectablePrefectures = memo(({ data }: Props) => {
   )
 })
 
-SelectablePrefectures.displayName = 'SelectablePrefectures'
+SelectableForm.displayName = 'SelectablePrefectures'

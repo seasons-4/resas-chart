@@ -1,5 +1,5 @@
-import { SelectablePrefectures } from './SelectablePrefectures'
-import { getPrefectures } from '../api'
+import { SelectableForm } from './SelectableForm'
+import { getPrefectures } from '../api/getPrefectures'
 
 /**
  * SelectablePrefectures.tsxのコンテナコンポーネント
@@ -10,5 +10,5 @@ export const SelectablePrefecturesContainer = async () => {
   // TODO: エラーハンドリング時のUIを作成する
   if (res.length === 0) return <div>データがありません</div>
 
-  return <SelectablePrefectures data={res} />
+  return <SelectableForm data={res} />
 }
