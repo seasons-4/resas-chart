@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '@styles/_variables' as var;
 
 :root {
@@ -15,8 +16,11 @@
 
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  max-width: map.get(var.$breakpoints, 'lg');
+
+  @media screen and (min-width: map.get(var.$breakpoints, 'lg')) {
+    margin: auto;
+  }
 }
 
 body {
@@ -24,7 +28,7 @@ body {
   color: var(--color-black);
   background-color: var(--color-light-gray);
 
-  @include var.mq('sp') {
-    font-size: 14px;
+  @include var.mq('sm') {
+    font-size: 12px;
   }
 }

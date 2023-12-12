@@ -1,5 +1,7 @@
+@use '@styles/_variables' as var;
+
 .container {
-  padding: 8px 24px;
+  padding: 8px 16px;
   background-color: var(--color-white);
   border-radius: 8px;
 }
@@ -18,4 +20,9 @@
   gap: 2rem;
   justify-content: start;
   margin-top: 4px;
+
+  @include var.mq('sm') {
+    grid-template: none / repeat(2, 1fr);
+    gap: 0.5rem;
+  }
 }
