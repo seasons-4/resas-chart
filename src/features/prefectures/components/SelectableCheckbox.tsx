@@ -5,7 +5,7 @@ import { memo } from 'react'
 
 import { LabeledCheckbox } from '@/components/LabeledCheckbox'
 
-import styles from './ui/SelectablePrefectures.module.scss'
+import styles from './ui/SelectableCheckbox.module.scss'
 import { usePrefectureQuery } from '../hooks/usePrefectureQuery'
 
 import type { ResasPrefecture } from '@/types'
@@ -19,7 +19,7 @@ type Props = {
  *
  * @param data - 都道府県の一覧
  */
-export const SelectableForm = memo(({ data }: Props) => {
+export const SelectableCheckbox = memo(({ data }: Props) => {
   const [selectedPrefectures, updateQueryParams] = usePrefectureQuery()
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateQueryParams(e.target.value)
@@ -28,9 +28,7 @@ export const SelectableForm = memo(({ data }: Props) => {
   return (
     <form>
       <fieldset className={clsx(styles['container'])}>
-        <legend className={clsx(styles.title)}>
-          都道府県を選択してください
-        </legend>
+        <legend className={clsx(styles.title)}>都道府県を選択</legend>
         <ol className={clsx(styles['flexible-list'])}>
           {data.map(({ prefCode, prefName }) => (
             <li key={prefCode}>
@@ -51,4 +49,4 @@ export const SelectableForm = memo(({ data }: Props) => {
   )
 })
 
-SelectableForm.displayName = 'SelectablePrefectures'
+SelectableCheckbox.displayName = 'SelectablePrefectures'
