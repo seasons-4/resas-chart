@@ -51,9 +51,9 @@ export const Chart = ({ data, chartLabel, chartTitle }: Props) => {
       enabled: false
     },
     legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'middle'
+      layout: 'horizontal',
+      align: 'center',
+      verticalAlign: 'bottom'
     },
     title: {
       text: titleText

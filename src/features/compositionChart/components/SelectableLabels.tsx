@@ -34,9 +34,7 @@ export const SelectableLabels = memo(() => {
   return (
     <form>
       <fieldset className={clsx(styles['container'])}>
-        <legend className={clsx(styles['title'])}>
-          人口構成の種類を選択してください
-        </legend>
+        <legend className={clsx(styles['title'])}>人口構成の種類を選択</legend>
         <ul className={clsx(styles['flexible-list'])}>
           {CHART_LABELS.map((label) => (
             <li key={label}>
