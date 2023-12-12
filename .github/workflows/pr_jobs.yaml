@@ -13,6 +13,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '20.2.0'
+      - name: Set env for common
+        run: |
+          echo "NEXT_PUBLIC_RESAS_API_KEY=${{ secrets.NEXT_PUBLIC_RESAS_API_KEY }}" >> .env
+          echo "NEXT_PUBLIC_RESAS_API_URL=${{ secrets.NEXT_PUBLIC_RESAS_API_URL }}" >> .env
       - name: Install Dependencies
         run: npm ci
 

@@ -30,19 +30,21 @@ export const ChartContainer = ({ prefBaseData }: Props) => {
   const prefCodes = searchParams
     .getAll(PREFECTURE_QUERY_KEY)
     .filter((code) => Number(code) > 0)
-  const chartLabel = searchParams.get(LABEL_QUERY_KEY) || '総人口'
-
-  if (!isCompositionPerYearLabel(chartLabel)) {
-    throw new Error('クエリパラメーターが不正です')
-  }
 
   const { data, isLoading, error } = useCompositionPerYear(
     prefBaseData.filter(({ prefCode }) => prefCodes.includes(String(prefCode)))
   )
 
-  // TODO: エラーハンドリング時のUIを作成する
-  if (!isUndefined(error)) {
-    return <div>エラーが発生しました</div>
+  const chartLabel = searchParams.get(LABEL_QUERY_KEY) || '総人口'
+
+  if (!isCompositionPerYearLabel(chartLabel) || !isUndefined(error)) {
+    return (
+      <Chart
+        chartLabel={'総人口'}
+        data={[]}
+        chartTitle="データ取得に失敗しました<br />時間をおいて再度お試しください"
+      />
+    )
   }
 
   const chartTitle =
