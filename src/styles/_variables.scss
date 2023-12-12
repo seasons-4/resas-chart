@@ -1,6 +1,7 @@
 $breakpoints: (
-  'sp': 800px,
-  'pc': 1100px
+  'sm': 768px,
+  'md': 1024px,
+  'lg': 1300px
 );
 
 @mixin mq($size) {
