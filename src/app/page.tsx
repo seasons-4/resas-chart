@@ -7,7 +7,8 @@ import styles from './page.module.scss'
 
 export default async function Home() {
   const res = await getPrefectures().catch(() => [])
-  if (res.length === 0) return <div>データがありません</div>
+  // NOTE: 都道府県一覧マスターデータが空の場合はビルドを失敗させる
+  if (res.length === 0) throw new Error('prefectures data is empty')
 
   return (
     <main className={clsx(styles.main)}>
