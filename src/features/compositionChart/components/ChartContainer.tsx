@@ -3,12 +3,14 @@
 import { isUndefined } from 'lodash'
 import { useSearchParams } from 'next/navigation'
 
-import { CompositionChart } from './CompositionChart'
-import { LABEL_QUERY_KEY, PREFECTURE_QUERY_KEY } from '../constants'
-import { isCompositionPerYearLabel } from '../filters'
-import { useCompositionPerYear } from '../hooks'
+import { PREFECTURE_QUERY_KEY } from '@/features/prefectures'
 
-import type { ResasPrefecture } from '../types'
+import { Chart } from './Chart'
+import { LABEL_QUERY_KEY } from '../constants'
+import { isCompositionPerYearLabel } from '../filters'
+import { useCompositionPerYear } from '../hooks/useCompositionPerYear'
+
+import type { ResasPrefecture } from '@/types'
 
 type Props = {
   prefBaseData: ResasPrefecture[]
@@ -23,7 +25,7 @@ type Props = {
  *
  * @param prefBaseData -  都道府県一覧のマスターデータ
  */
-export const CompositionChartContainer = ({ prefBaseData }: Props) => {
+export const ChartContainer = ({ prefBaseData }: Props) => {
   const searchParams = useSearchParams()
   const prefCodes = searchParams
     .getAll(PREFECTURE_QUERY_KEY)
@@ -48,11 +50,5 @@ export const CompositionChartContainer = ({ prefBaseData }: Props) => {
       ? 'データ取得中'
       : undefined
 
-  return (
-    <CompositionChart
-      chartLabel={chartLabel}
-      data={data}
-      chartTitle={chartTitle}
-    />
-  )
+  return <Chart chartLabel={chartLabel} data={data} chartTitle={chartTitle} />
 }

@@ -1,13 +1,13 @@
 import { expect, jest } from '@storybook/jest'
 import { userEvent, waitFor, within } from '@storybook/testing-library'
 
-import { SelectablePrefectures } from './SelectablePrefectures'
+import { SelectableForm } from '../SelectableForm'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  title: 'prefectureChart/SelectablePrefectures',
-  component: SelectablePrefectures,
+  title: 'prefectureChart/SelectableForm',
+  component: SelectableForm,
   tags: ['autodocs'],
   args: {
     data: [...Array(5).keys()].map((i) => ({
@@ -16,7 +16,7 @@ const meta = {
     }))
   },
   parameters: {}
-} satisfies Meta<typeof SelectablePrefectures>
+} satisfies Meta<typeof SelectableForm>
 
 export default meta
 type Story = StoryObj<typeof meta>

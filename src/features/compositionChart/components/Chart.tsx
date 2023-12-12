@@ -26,7 +26,7 @@ type Props = {
  * @param chartLabel - 描画したい人口構成のラベル名
  * @param chartTitle - タイトルに表示したい文字列(optionalなため親からも指定したい場合のみ代入可能)
  */
-export const CompositionChart = ({ data, chartLabel, chartTitle }: Props) => {
+export const Chart = ({ data, chartLabel, chartTitle }: Props) => {
   const { series, categories } = getChartOptions(data, chartLabel)
 
   const titleText = (() => {

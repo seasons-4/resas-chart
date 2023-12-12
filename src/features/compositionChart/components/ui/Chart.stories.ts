@@ -1,21 +1,21 @@
 import { expect } from '@storybook/jest'
 import { within } from '@storybook/testing-library'
 
-import { CompositionChart } from './CompositionChart'
-import { COMPOSITION_PER_PREF_LIST } from '../test/mock'
+import { COMPOSITION_PER_PREF_LIST } from '../../test/mock'
+import { Chart } from '../Chart'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  title: 'prefectureChart/CompositionChart',
-  component: CompositionChart,
+  title: 'prefectureChart/Chart',
+  component: Chart,
   tags: ['autodocs'],
   args: {
     data: COMPOSITION_PER_PREF_LIST,
     chartLabel: '総人口'
   },
   parameters: {}
-} satisfies Meta<typeof CompositionChart>
+} satisfies Meta<typeof Chart>
 
 export default meta
 type Story = StoryObj<typeof meta>

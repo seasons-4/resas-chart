@@ -1,17 +1,17 @@
 import { expect, jest } from '@storybook/jest'
 import { userEvent, waitFor, within } from '@storybook/testing-library'
 
-import { SelectableCompositionLabels } from './SelectableCompositionLabels'
+import { SelectableLabels } from '../SelectableLabels'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  title: 'prefectureChart/SelectableCompositionLabels',
-  component: SelectableCompositionLabels,
+  title: 'prefectureChart/SelectableLabels',
+  component: SelectableLabels,
   tags: ['autodocs'],
   args: {},
   parameters: {}
-} satisfies Meta<typeof SelectableCompositionLabels>
+} satisfies Meta<typeof SelectableLabels>
 
 export default meta
 type Story = StoryObj<typeof meta>
