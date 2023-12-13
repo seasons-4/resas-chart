@@ -22,6 +22,7 @@ const COMPOSITION_CACHE_KEY_PREFIX = 'composition-' as const
  * キャッシュがある場合はAPIリクエストを発生させず、キャッシュを返す。
  * キャッシュがない場合はAPIからデータを取得し、指定のキー名でキャッシュする。
  * APIから取得中もキャッシュに選択中の都道府県のデータがあればそれが返され、キャッシュに更新があるとフックされ新規のデータが返される。
+ * [このDiscussionsの動向によってはそちらに移行を検討すること](https://github.com/vercel/swr/discussions/1988)
  *
  * @param prefectures - 人口構成データを取得する都道府県のリスト
  * @returns data, error キャッシュされたコンポジションデータと、フェッチ中に発生したエラーを含むオブジェクト。
