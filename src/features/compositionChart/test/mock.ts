@@ -3,7 +3,7 @@ import type { CompositionPerPref } from '../types'
 /**
  * 都道府県ごとの人口構成モックデータ
  */
-export const COMPOSITION_PER_PREF_LIST: CompositionPerPref[] = [
+export const COMPOSITION_PER_PREF_LIST = [
   {
     prefCode: 1 as const,
     prefName: '北海道',
@@ -110,4 +110,4 @@ export const COMPOSITION_PER_PREF_LIST: CompositionPerPref[] = [
       ]
     }
   }
-]
+] as const satisfies CompositionPerPref[]
