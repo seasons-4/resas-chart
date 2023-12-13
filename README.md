@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# resas-chart
 
-## Getting Started
+RESAS API(地域経済分析システム)を利用したグラフ描画アプリケーション
 
-First, run the development server:
+## 技術スタック
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### 主要package構成
+
+- Next.js(14系, **static export**)
+- highcharts
+- swr
+  (詳細はpackage.jsonを参照)
+
+### 主要開発用package構成
+
+- Typescript
+- sass
+- typed-scss-modules
+- eslint
+- prettier
+- stylelint
+- husky
+- storybook(@storybook/jest)
+- jest(ts-jest)
+- commitlint
+  (詳細はpackage.jsonを参照)
+
+## 環境構築
+
+- node: 20.2.0
+- npm: 9.6.6
+  (voltaを利用している場合は、package.jsonに記載のバージョンを利用可能)
+
+(RESAS APIの利用登録が完了しており、APIキーが発行されている必要があります)
+
+1. $ `cp .env.example .env`
+   コマンド実行後、`.env`ファイルにRESAS APIのAPIキーおよびAPI URLを記載（URLは公開されているものを利用しています）
+2. $ `npm install`
+3. $ `npm run dev`
+
+### テスト
+
+- Jest $ `npm run test`
+- インタラクションテスト $ `npm run test-storybook`
+  (Storybookを起動した状態で実行する必要があります。また初回のみplaywrightが必要な旨のメッセージが表示される場合があります。)
+
+## その他概要
+
+<details>
+<summary>ディレクトリ構成</summary>
+[参考](https://github.com/alan2207/bulletproof-react/blob/master/docs/project-structure.md)
+
+```
+root/
+  │─.github
+    │─ github actionsのjob
+    │─ PRテンプレート
+  │─.husky
+    │─ huskyの設定ファイル
+  │─.storybook
+    │─ storybookのグローバル設定
+  │─.vscode
+    │─ vscodeでの開発時の設定および拡張機能の推奨設定
+  │─public
+    │─ 静的ファイル
+  │─src/
+    │─app/
+      │─ error.tsx
+      │─ globals.scss
+      │─ layout.tsx
+      │─ page.tsx
+    │─components/
+      │─ 共通コンポーネント
+    │─features
+      │─ 各機能dir/
+        │─api/
+        │─components/
+        │─constants/
+        │─hooks/
+        │─types/
+        ...
+        │─index.ts(ここからexportされたもの以外は外部から参照できないeslintの設定)
+    │─lib
+      │─ ライブラリの拡張開発
+    │─styles
+      │─ mixin, variableなどの共通スタイル
+    │─types
+      │─ グローバルな型やアプリケーションで共通な型の定義
+  │─next.config.js, .evn, package.json などの設定ファイル
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+</details>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- 都道府県および表示するグラフの種類を選択することで、条件に合ったグラフを表示(グラフデータはRESAS APIから取得)
+- 選択中の条件は全てURLパラメータに反映される(URL共有時に条件に沿ったグラフを表示可能)
+- 取得したデータはSWRを利用してキャッシュし、キャッシュされたデータに関してはAPIへのリクエストを行わないことで、APIの負荷を軽減
+- 都道府県一覧情報(/prefecturesエンドポイント)はbuild時にのみ取得(サーバーコンポーネントであるpage.tsxで取得)
+- レスポンシブ対応（~768px, ~1024px, ~1300px）
+- featuresディレクトリとeslintの設定を利用して、co-locationを意識したディレクトリ構成とした
