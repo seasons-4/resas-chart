@@ -17,6 +17,7 @@ jobs:
         run: |
           echo "NEXT_PUBLIC_RESAS_API_KEY=${{ secrets.NEXT_PUBLIC_RESAS_API_KEY }}" >> .env
           echo "NEXT_PUBLIC_RESAS_API_URL=${{ secrets.NEXT_PUBLIC_RESAS_API_URL }}" >> .env
+          echo "NEXT_PUBLIC_SITE_BASE_URL=${{ secrets.NEXT_PUBLIC_SITE_BASE_URL }}" >> .env
       - name: Install Dependencies
         run: npm ci
 
