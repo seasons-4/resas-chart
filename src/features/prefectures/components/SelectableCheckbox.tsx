@@ -49,4 +49,4 @@ export const SelectableCheckbox = memo(({ data }: Props) => {
   )
 })
 
-SelectableCheckbox.displayName = 'SelectablePrefectures'
+SelectableCheckbox.displayName = 'SelectableCheckbox'

@@ -31,10 +31,23 @@ export const SelectableLabels = memo(() => {
     router.push(`${pathName}?${decodeURI(newSearchParams.toString())}`)
   }
 
+  const onClickClear = () => {
+    router.push(`${pathName}?${LABEL_QUERY_KEY}=${CHART_LABELS[0]}`)
+  }
+
   return (
     <form>
       <fieldset className={clsx(styles['container'])}>
         <legend className={clsx(styles['title'])}>人口構成の種類を選択</legend>
+
+        <button
+          type="button"
+          className={clsx(styles['sub-title'])}
+          onClick={onClickClear}
+        >
+          <span className={clsx(styles['link-text'])}>選択をクリア</span>
+        </button>
+
         <ul className={clsx(styles['flexible-list'])}>
           {CHART_LABELS.map((label) => (
             <li key={label}>
@@ -54,4 +67,4 @@ export const SelectableLabels = memo(() => {
   )
 })
 
-SelectableLabels.displayName = 'SelectableCompositionLabels'
+SelectableLabels.displayName = 'SelectableLabels'
