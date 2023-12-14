@@ -11,11 +11,12 @@ export default async function Home() {
   if (res.length === 0) throw new Error('prefectures data is empty')
 
   return (
-    <main className={clsx(styles.main)}>
+    <main className={clsx(styles['main'])}>
       <div className={clsx(styles['sub-section'])}>
         <SelectableCheckbox data={res} />
       </div>
       <section className={clsx(styles['main-section'])}>
+        <h1 className={clsx(styles['page-title'])}>地域・年単位の年齢構成</h1>
         <SelectableLabels />
         <ChartContainer prefBaseData={res} />
       </section>

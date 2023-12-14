@@ -1,9 +1,21 @@
 @use '@styles/_variables' as var;
 
 .container {
-  padding: 8px 16px;
+  position: relative;
+  padding: 8px 1rem;
   background-color: var(--color-white);
   border-radius: 8px;
+}
+
+.sub-title {
+  position: absolute;
+  top: -1rem;
+  right: 1rem;
+}
+
+.link-text {
+  color: var(--color-primary);
+  text-decoration: underline;
 }
 
 .title {
@@ -16,13 +28,12 @@
 
 .flexible-list {
   display: grid;
-  grid-template: none / repeat(4, 1fr);
-  gap: 2rem;
+  grid-template: none / repeat(2, 1fr);
+  gap: 1rem;
   justify-content: start;
   margin-top: 4px;
 
   @include var.mq('sm') {
-    grid-template: none / repeat(2, 1fr);
     gap: 0.5rem;
   }
 }

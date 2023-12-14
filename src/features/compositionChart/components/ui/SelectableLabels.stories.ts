@@ -41,6 +41,7 @@ export const PlayClick: Story = {
     }
   },
   play: async ({ canvasElement }) => {
+    mockRouterPush.mockClear()
     const canvas = within(canvasElement)
 
     // propsのレンダリングテスト
@@ -54,10 +55,37 @@ export const PlayClick: Story = {
     const secondCheckbox = canvas.getByRole('radio', { name: '総人口' })
     expect(secondCheckbox).not.toBeChecked()
 
-    // // クリックイベントテスト
+    // クリックイベントテスト
     await userEvent.click(secondCheckbox)
     await waitFor(() =>
-      expect(mockRouterPush).toHaveBeenNthCalledWith(1, '/?label=総人口')
+      expect(mockRouterPush).toHaveBeenCalledWith('/?label=総人口')
+    )
+  }
+}
+
+export const PlayClear: Story = {
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+      navigation: {
+        pathname: '/',
+        query: {
+          label: '年少人口',
+          test: 'value'
+        },
+        push: mockRouterPush
+      }
+    }
+  },
+  play: async ({ canvasElement }) => {
+    mockRouterPush.mockClear()
+    const canvas = within(canvasElement)
+    const clearButton = canvas.getByText('選択をクリア')
+
+    // クリックイベントテスト
+    await userEvent.click(clearButton)
+    await waitFor(() =>
+      expect(mockRouterPush).toHaveBeenCalledWith('/?label=総人口')
     )
   }
 }
