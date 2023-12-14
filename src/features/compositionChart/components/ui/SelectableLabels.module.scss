@@ -28,13 +28,12 @@
 
 .flexible-list {
   display: grid;
-  grid-template: none / repeat(4, 1fr);
-  gap: 2rem;
+  grid-template: none / repeat(2, 1fr);
+  gap: 1rem;
   justify-content: start;
   margin-top: 4px;
 
   @include var.mq('sm') {
-    grid-template: none / repeat(2, 1fr);
     gap: 0.5rem;
   }
 }

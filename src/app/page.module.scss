@@ -39,8 +39,9 @@
 .main-section {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   width: calc(map.get(var.$breakpoints, 'lg') - 30% - 2rem);
+  max-height: 90vh;
   margin-left: 2rem;
 
   @include var.mq('md') {
@@ -54,4 +55,14 @@
     max-width: none;
     margin-left: 0;
   }
+}
+
+.page-title {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding-top: 0.5rem;
+  padding-right: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
 }
