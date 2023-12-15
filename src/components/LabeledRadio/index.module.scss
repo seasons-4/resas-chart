@@ -1,3 +1,5 @@
+@use '@styles/_variables' as var;
+
 .label {
   display: flex;
   flex-direction: row;
@@ -19,6 +21,10 @@
     &:hover {
       opacity: 0.8;
     }
+  }
+
+  @include var.mq('sm') {
+    padding: 0.25rem 0.7rem 0.25rem 0.5rem;
   }
 }
 

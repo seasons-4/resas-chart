@@ -38,15 +38,7 @@ export const SelectableLabels = memo(() => {
   return (
     <form>
       <fieldset className={clsx(styles['container'])}>
-        <legend className={clsx(styles['title'])}>人口構成の種類を選択</legend>
-
-        <button
-          type="button"
-          className={clsx(styles['sub-title'])}
-          onClick={onClickClear}
-        >
-          <span className={clsx(styles['link-text'])}>選択をクリア</span>
-        </button>
+        <legend className={clsx(styles['title'])}>人口構成を選択</legend>
 
         <ul className={clsx(styles['flexible-list'])}>
           {CHART_LABELS.map((label) => (
@@ -62,6 +54,14 @@ export const SelectableLabels = memo(() => {
             </li>
           ))}
         </ul>
+
+        <button
+          type="button"
+          className={clsx(styles['end-item'])}
+          onClick={onClickClear}
+        >
+          <span className={clsx(styles['link-text'])}>選択をクリア</span>
+        </button>
       </fieldset>
     </form>
   )
