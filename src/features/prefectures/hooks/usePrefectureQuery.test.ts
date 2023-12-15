@@ -46,7 +46,7 @@ describe('usePrefectureQuery', () => {
     expect(currentParams).toEqual(['1'])
   })
 
-  it('クエリパラーメーターに新しく値を追加する場合', () => {
+  it('クエリパラーメーターを変更する', () => {
     const { mockUsePathname, mockUseRouter } = mockNavigation(
       'prefecture=1&prefecture=2'
     )
@@ -54,27 +54,10 @@ describe('usePrefectureQuery', () => {
     const [, updateParams] = result.current
 
     act(() => {
-      updateParams('3')
+      updateParams([3])
     })
     const { push } = mockUseRouter()
-    expect(push).toHaveBeenNthCalledWith(
-      1,
-      `${mockUsePathname()}?prefecture=1&prefecture=2&prefecture=3`
-    )
-  })
-
-  it('クエリパラーメーターから既存の値を削除する場合', () => {
-    const { mockUsePathname, mockUseRouter } = mockNavigation(
-      'prefecture=1&prefecture=2'
-    )
-    const { result } = renderHook(() => usePrefectureQuery())
-    const [, updateParams] = result.current
-
-    act(() => {
-      updateParams('1')
-    })
-    const { push } = mockUseRouter()
-    expect(push).toHaveBeenNthCalledWith(1, `${mockUsePathname()}?prefecture=2`)
+    expect(push).toHaveBeenNthCalledWith(1, `${mockUsePathname()}?prefecture=3`)
   })
 
   it('他のクエリパラメーターが存在する場合', () => {
@@ -83,12 +66,12 @@ describe('usePrefectureQuery', () => {
     const [, updateParams] = result.current
 
     act(() => {
-      updateParams('2')
+      updateParams([2])
     })
     const { push } = mockUseRouter()
     expect(push).toHaveBeenNthCalledWith(
       1,
-      `${mockUsePathname()}?other=test&prefecture=1&prefecture=2`
+      `${mockUsePathname()}?other=test&prefecture=2`
     )
   })
 })

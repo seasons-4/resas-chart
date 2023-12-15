@@ -1,6 +1,8 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
 
+import { PREFECTURE_QUERY_KEY } from '../constants'
+
 /**
  * prefectureクエリパラメーターを管理するためのカスタムフックです。
  *
@@ -11,31 +13,23 @@ export const usePrefectureQuery = () => {
   const pathName = usePathname()
   const searchParams = useSearchParams()
 
-  const currentParams = searchParams.getAll('prefecture')
+  const currentParams = searchParams.getAll(PREFECTURE_QUERY_KEY)
 
   const updateParams = useCallback(
-    (targetValue: string) => {
+    (targetValue: number[]) => {
       const newSearchParams = new URLSearchParams(searchParams.toString())
-      if (currentParams.includes(targetValue)) {
-        newSearchParams.delete('prefecture', targetValue)
-      } else {
-        newSearchParams.append('prefecture', targetValue)
-      }
 
-      // 不正な値を排除し、クエリパラメーターの順番をprefCodeの昇順にする
-      const newPrefCodes = newSearchParams
-        .getAll('prefecture')
-        .filter((code) => Number(code) > 0)
-        .sort((a, b) => Number(a) - Number(b))
-      newSearchParams.delete('prefecture')
+      // クエリパラメーターの順番をprefCodeの昇順にする
+      const newPrefCodes = [...targetValue].sort((a, b) => a - b)
+      newSearchParams.delete(PREFECTURE_QUERY_KEY)
       newPrefCodes.forEach((prefCode) =>
-        newSearchParams.append('prefecture', prefCode)
+        newSearchParams.append(PREFECTURE_QUERY_KEY, String(prefCode))
       )
 
       // クエリパラメーターが1つもない場合はrouter.pushが吸収してくれるため`?`がつかない
       router.push(`${pathName}?${newSearchParams.toString()}`)
     },
-    [currentParams, pathName, router, searchParams]
+    [pathName, searchParams, router]
   )
 
   return [currentParams, updateParams] as const

@@ -1,16 +1,15 @@
 @use '@styles/_variables' as var;
 
 .container {
-  position: relative;
   padding: 8px 1rem;
   background-color: var(--color-white);
   border-radius: 8px;
 }
 
-.sub-title {
-  position: absolute;
-  top: -1rem;
-  right: 1rem;
+.end-item {
+  width: 100%;
+  margin-top: 0.5rem;
+  text-align: right;
 }
 
 .link-text {
@@ -27,13 +26,15 @@
 }
 
 .flexible-list {
-  display: grid;
-  grid-template: none / repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
-  justify-content: start;
+  justify-content: flex-start;
   margin-top: 4px;
 
   @include var.mq('sm') {
+    display: grid;
+    grid-template: none / repeat(2, 1fr);
     gap: 0.5rem;
   }
 }

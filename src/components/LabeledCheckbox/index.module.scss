@@ -1,3 +1,5 @@
+@use '@styles/_variables' as var;
+
 .label {
   position: relative;
   display: inline-block;
@@ -15,6 +17,10 @@
     font-weight: bold;
     background-color: var(--color-secondary-sub);
   }
+
+  @include var.mq('sm') {
+    padding: 0.25rem 1rem 0.25rem 2rem;
+  }
 }
 
 .checkbox {
@@ -25,11 +31,11 @@
   display: block;
   width: 1rem;
   height: 1rem;
-  margin-top: -0.5rem;
   content: '';
   background-color: var(--color-white);
   border: 1px solid var(--color-light-gray);
   border-radius: 3px;
+  transform: translate(0, -50%);
 
   .label:hover & {
     border-color: var(--color-secondary-sub);
@@ -55,7 +61,12 @@
       height: 0.75rem;
       border: solid var(--color-white);
       border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
+      transform: translate(0, -25%) rotate(45deg);
     }
+  }
+
+  @include var.mq('sm') {
+    width: 0.75rem;
+    height: 0.75rem;
   }
 }
