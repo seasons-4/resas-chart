@@ -49,23 +49,26 @@ export const PlayClick: Story = {
     const canvas = within(canvasElement)
 
     // propsのレンダリングテスト
-    const listItems = canvas.getAllByRole('listitem')
+    const listItems = await canvas.findAllByRole('listitem')
     expect(listItems).toHaveLength(5)
 
     // default checkedテスト
-    const firstCheckbox = canvas.getByRole('checkbox', { name: '県1' })
+    const firstCheckbox = await canvas.findByRole('checkbox', { name: '県1' })
     expect(firstCheckbox).toBeChecked()
 
-    const secondCheckbox = canvas.getByRole('checkbox', { name: '県2' })
+    const secondCheckbox = await canvas.findByRole('checkbox', { name: '県2' })
     expect(secondCheckbox).not.toBeChecked()
 
-    // クリックイベントテスト
+    // 県2をtrueにする
     userEvent.click(secondCheckbox)
+    // 県1をfalseにする
+    userEvent.click(firstCheckbox)
+
+    const submitButton = await canvas.findByRole('button', { name: '検索' })
+    userEvent.click(submitButton)
+
     await waitFor(() =>
-      expect(mockRouterPush).toHaveBeenNthCalledWith(
-        1,
-        '/?prefecture=1&prefecture=2'
-      )
+      expect(mockRouterPush).toHaveBeenNthCalledWith(1, '/?prefecture=2')
     )
   }
 }

@@ -21,23 +21,29 @@ type Props = {
  */
 export const SelectableCheckbox = memo(({ data }: Props) => {
   const [selectedPrefectures, updateQueryParams] = usePrefectureQuery()
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateQueryParams(e.target.value)
+
+  const formAction = (formData: FormData) => {
+    const prefCodes = formData
+      .getAll('prefecture')
+      .map((prefCode) => Number(prefCode))
+    updateQueryParams(prefCodes)
   }
 
   return (
-    <form>
+    <form action={formAction} className={clsx(styles['wrapper'])}>
+      <button type="submit" className={clsx(styles['absolute-button'])}>
+        検索
+      </button>
       <fieldset className={clsx(styles['container'])}>
-        <legend className={clsx(styles.title)}>都道府県を選択</legend>
+        <legend className={clsx(styles['title'])}>都道府県を選択</legend>
         <ol className={clsx(styles['flexible-list'])}>
           {data.map(({ prefCode, prefName }) => (
             <li key={prefCode}>
               <LabeledCheckbox
                 id={String(prefCode)}
-                name={prefName}
+                name="prefecture"
                 value={prefCode}
-                onChange={onChange}
-                checked={selectedPrefectures.includes(String(prefCode))}
+                defaultChecked={selectedPrefectures.includes(String(prefCode))}
               >
                 {prefName}
               </LabeledCheckbox>
