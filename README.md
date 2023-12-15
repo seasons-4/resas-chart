@@ -1,6 +1,7 @@
 # resas-chart
 
 RESAS API(地域経済分析システム)を利用したグラフ描画アプリケーション
+デプロイ先：https://resas-chart-seasons-4.vercel.app/
 
 ## 技術スタック
 
